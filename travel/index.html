@@ -11,7 +11,7 @@
   --primary:#0E7C7B; --primary2:#17A398; --tag:#F26B5B;
   --spa-bg:#E8F5E9; --spa-fg:#2E7D32; --food-bg:#FFF3E0; --food-fg:#C25100;
   --act-bg:#E1F5FE; --act-fg:#0277BD; --show-bg:#EDE7F6; --show-fg:#5E35B1;
-  --warn-bg:#FFF8E1; --warn-fg:#8D6E00; --btn-bg:#EEF7F6;
+  --warn-bg:#FFF8E1; --warn-fg:#8D6E00; --btn-bg:#EEF7F6; --star:#E08A00;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
@@ -19,7 +19,7 @@
     --primary:#4FC3B8; --primary2:#2BA597; --tag:#E0675A;
     --spa-bg:#1D3322; --spa-fg:#8FD19A; --food-bg:#3A2A16; --food-fg:#FFB870;
     --act-bg:#14303D; --act-fg:#7CCBF2; --show-bg:#2A2340; --show-fg:#B9A6F2;
-    --warn-bg:#352D12; --warn-fg:#F2D27A; --btn-bg:#1E2F2E;
+    --warn-bg:#352D12; --warn-fg:#F2D27A; --btn-bg:#1E2F2E; --star:#FFB84D;
   }
 }
 :root[data-theme="dark"]{
@@ -27,7 +27,7 @@
   --primary:#4FC3B8; --primary2:#2BA597; --tag:#E0675A;
   --spa-bg:#1D3322; --spa-fg:#8FD19A; --food-bg:#3A2A16; --food-fg:#FFB870;
   --act-bg:#14303D; --act-fg:#7CCBF2; --show-bg:#2A2340; --show-fg:#B9A6F2;
-  --warn-bg:#352D12; --warn-fg:#F2D27A; --btn-bg:#1E2F2E;
+  --warn-bg:#352D12; --warn-fg:#F2D27A; --btn-bg:#1E2F2E; --star:#FFB84D;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Segoe UI",sans-serif;padding:16px;line-height:1.5}
@@ -38,7 +38,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .box{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--primary);border-radius:10px;padding:12px 14px;margin-bottom:14px;font-size:13px}
 .box strong{display:block;margin-bottom:4px}
 .box ul{padding-left:18px}
-.warn{background:var(--warn-bg);border-left-color:var(--warn-fg);color:var(--text)}
+.warn{background:var(--warn-bg);border-left-color:var(--warn-fg)}
 .warn strong{color:var(--warn-fg)}
 .day{background:var(--card);border:1px solid var(--line);border-radius:16px;margin-bottom:16px;overflow:hidden}
 .dh{background:linear-gradient(90deg,var(--primary),var(--primary2));color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:8px;font-weight:700;font-size:15px}
@@ -50,6 +50,8 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .d{flex:1;padding-left:12px;border-left:2px dashed var(--line);min-width:0}
 .ti{font-weight:700;font-size:14px;margin-bottom:2px}
 .ds{font-size:12px;color:var(--sub)}
+.st{font-size:12px;color:var(--star);font-weight:700}
+.mv{font-size:11px;color:var(--sub);margin:-8px 0 12px 96px}
 .b{display:inline-block;padding:1px 7px;border-radius:6px;font-size:10px;font-weight:700;margin:0 4px 4px 0}
 .spa{background:var(--spa-bg);color:var(--spa-fg)}
 .food{background:var(--food-bg);color:var(--food-fg)}
@@ -65,58 +67,68 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 
 <div class="hero">
   <h1>🌴 푸꾸옥 3박 5일</h1>
-  <p>10/22(목) 새벽 도착 → 10/25(일) 밤 출국 · 망고베이 리조트</p>
+  <p>10/22(목) 05:35 도착 → 10/25(일) 22:10 출국 · 망고베이 리조트</p>
 </div>
 
 <div class="box">
-  <strong>🏨 망고베이 리조트 (Mango Bay, 옹랑 비치)</strong>
+  <strong>✈️ 항공 (시각은 모두 현지 시각)</strong>
   <ul>
-    <li>공항 약 30분 · 즈엉동 시내 약 15분 · 선셋타운은 섬 남쪽 끝이라 멀다</li>
-    <li>체크인 14:00 / 체크아웃 12:00 — 얼리 체크인·레이트 체크아웃은 당일 빈방 있을 때만, 추가요금 가능. 요금 미공개라 reservations@mangobayphuquoc.com 으로 문의</li>
-    <li>서쪽 해변이라 리조트에서 석양이 보인다</li>
-    <li>투숙객 공항 픽업·샌딩 무료 (항공편 알려주고 사전 신청) · 전화 +84 96 968 1820 (현지 07–21시)</li>
+    <li>가는 편 비엣젯 VJ979 · 10/22 02:10 인천 <b>T1</b> → 05:35 푸꾸옥</li>
+    <li>오는 편 진에어 LJ136 · 10/25 22:10 푸꾸옥 → 10/26 05:20 인천 <b>T2</b></li>
+    <li>출발 T1 · 도착 T2 로 터미널이 다르다 (차를 T1 에 세우면 도착 후 이동 필요)</li>
+    <li>10/21(수) 밤에 인천 도착 — "22일 02:10" 비행기다</li>
   </ul>
-  <a class="map" href="https://www.google.com/maps/search/?api=1&query=Mango+Bay+Resort+Phu+Quoc" target="_blank">📍 망고베이 지도</a>
+</div>
+
+<div class="box">
+  <strong>🏨 망고베이 리조트 (옹랑 비치) <span class="st">★4.5 (2,070)</span></strong>
+  <ul>
+    <li>체크인 14:00 / 체크아웃 12:00 · 얼리·레이트는 빈방 있을 때만, 추가요금 가능</li>
+    <li>서쪽 해변이라 리조트에서 석양이 보인다</li>
+    <li>에어컨은 <b>Premium Plantation 방갈로 두 종류에만</b> 있다 · 수영장 없음 · 저녁 모기</li>
+  </ul>
+  <a class="map" href="https://www.google.com/maps/search/?api=1&query=10.2585496,103.9357132" target="_blank">📍 망고베이 지도</a>
 </div>
 
 <div class="box warn">
-  <strong>⚠ 방 고를 때</strong>
+  <strong>ℹ️ 표기</strong>
   <ul>
-    <li>에어컨은 <b>Premium Plantation 방갈로 두 종류에만</b> 있다. 나머지는 선풍기·모기장</li>
-    <li>수영장 없음 (바다 수영). 밤에 모기 — 기피제 챙기기</li>
+    <li>★ = 구글 평점 (리뷰 수) · 2026-09-27 조회</li>
+    <li>🚕 이동시간 = 구글 지도 차량 경로, 조회 시점 교통 기준. 당일 달라질 수 있다</li>
   </ul>
 </div>
 
 <!-- DAY 1 -->
 <div class="day">
-  <div class="dh"><span>DAY 1 · 10/22 목</span><span class="tag">도착 · 즈엉동 · 리조트 석양</span></div>
+  <div class="dh"><span>DAY 1 · 10/22 목</span><span class="tag">도착 · 스파 · 리조트 석양</span></div>
   <div class="tl">
-    <div class="ev"><div class="t">02:00 →</div><div class="d">
-      <div class="ti">✈️ 인천 출발 → 푸꾸옥 도착</div>
-      <div class="ds">10/21(수) 밤 23시 전후 인천공항 도착. 도착 시각은 항공권 기준으로 다시 맞출 것</div>
+    <div class="ev"><div class="t">05:35</div><div class="d">
+      <div class="ti">✈️ 푸꾸옥 도착 → 입국심사 · 짐 찾기</div>
+      <div class="ds">사전 입국신고(PAI) QR 준비</div>
     </div></div>
-    <div class="ev"><div class="t">08:00 - 10:00</div><div class="d">
-      <span class="b spa">스파</span><span class="b rsv">예약</span>
-      <div class="ti">💆 라온스파 (소나시)</div>
-      <div class="ds">08시 오픈 · 샤워·짐보관 · 공항 무료 픽업은 비엣젯 VJ975·VJ979 만 (다른 편이면 그랩) · 밤샘 비행 피로 풀기 90분</div>
-      <a class="map" href="https://www.google.com/maps/search/?api=1&query=Laon+Spa+Phu+Quoc" target="_blank">📍 지도</a>
+    <div class="mv">🚕 라온스파 무료 픽업 (VJ979 대상) · 공항 → 라온 19분 7.8km</div>
+    <div class="ev"><div class="t">도착 후<br>~ 09:30</div><div class="d">
+      <span class="b spa">스파</span><span class="b rsv">카톡 예약</span>
+      <div class="ti">💆 라온스파 &amp; 네일 (소나시) <span class="st">★4.9 (9,344)</span></div>
+      <div class="ds">짐보관 · 샤워 · 한국인 직원 · 90분 · 리뷰: 새벽 도착 후 픽업받아 이용한 후기 있음, 일찍 가도 바로 받아줬다는 후기 있음</div>
+      <div class="ds">구글 영업시간 09–22시 → <b>새벽 도착 후 몇 시부터 되는지 카톡으로 확정</b></div>
+      <a class="map" href="https://www.google.com/maps/search/?api=1&query=10.1303393,103.9831369" target="_blank">📍 지도</a>
     </div></div>
-    <div class="ev"><div class="t">10:30 - 11:30</div><div class="d">
+    <div class="mv">🚕 라온 → 분꿔이 26분 11.7km</div>
+    <div class="ev"><div class="t">10:00 - 11:00</div><div class="d">
       <span class="b food">아침 겸 점심</span>
-      <div class="ti">🍜 분꿔이 끼엔싸이 (Bún Quậy Kiến Xây)</div>
-      <div class="ds">푸꾸옥 특산 즉석 해산물 어묵 쌀국수 · <b>2호점(34 Đường 30 Tháng 4) 으로 갈 것</b> — 07:00–23:30 종일 영업. 1호점·3호점은 10:00~10:30 에 오전 영업 끝</div>
-      <a class="map" href="https://www.google.com/maps/search/?api=1&query=Bun+Quay+Kien+Xay+34+30+Thang+4+Duong+Dong" target="_blank">📍 지도</a>
+      <div class="ti">🍜 분꿔이 끼엔싸이 본점 <span class="st">★4.2 (6,414)</span></div>
+      <div class="ds">28 Bạch Đằng · 매일 06:50–22:30 (목 23:30) · 푸꾸옥 특산 즉석 해산물 어묵 쌀국수 · 1인 10만 동 이하</div>
+      <a class="map" href="https://www.google.com/maps/search/?api=1&query=10.2188471,103.9585161" target="_blank">📍 지도</a>
     </div></div>
-    <div class="ev"><div class="t">12:00 - 17:00</div><div class="d">
-      <div class="ti">🏨 망고베이 이동 · 짐 맡기고 해변 휴식 → 14:00 체크인 · 낮잠</div>
+    <div class="mv">🚕 분꿔이 → 망고베이 18분 8.8km</div>
+    <div class="ev"><div class="t">11:30 - 17:00</div><div class="d">
+      <div class="ti">🏨 망고베이 · 짐 맡기고 해변 → 14:00 체크인 · 낮잠</div>
     </div></div>
     <div class="ev"><div class="t">17:30 - 19:30</div><div class="d">
-      <span class="b food">저녁 · 석양</span>
-      <div class="ti">🌅 온더락스 (On the Rocks, 망고베이 안)</div>
-      <div class="ds">옹랑 바다 위 석양 · 시그니처: 망고베이 씨푸드 보드 (랍스터·새우·가리비·오징어)</div>
-    </div></div>
-    <div class="ev"><div class="t">~</div><div class="d">
-      <div class="ti">😴 일찍 취침 — 내일 아침 투어 픽업</div>
+      <span class="b food">저녁 · 석양</span><span class="b rsv">예약</span>
+      <div class="ti">🌅 On The Rock (망고베이 안) <span class="st">★4.3 (472)</span></div>
+      <div class="ds">매일 11–22시 · 리뷰: 해 질 시간에 맞춰 예약하면 바닷가 자리 · 해산물 플래터 2인 185만 동 · 시간이 지나면 테이블 정리한다는 후기</div>
     </div></div>
   </div>
 </div>
@@ -125,34 +137,36 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 <div class="day">
   <div class="dh"><span>DAY 2 · 10/23 금</span><span class="tag">남부 호핑 · 키스 오브 더 씨</span></div>
   <div class="tl">
-    <div class="ev"><div class="t">07:30 - 15:00</div><div class="d">
+    <div class="ev"><div class="t">아침 픽업<br>~ 오후</div><div class="d">
       <span class="b act">액티비티</span><span class="b rsv">예약</span>
       <div class="ti">🥽 남부 섬 호핑투어</div>
-      <div class="ds">스노클링 · 낚시 · 점심 포함 · 옹랑(망고베이) 픽업은 상품마다 추가요금 (1인 왕복 8천 원 ~ 편도 20달러) · 파도로 취소될 수 있음</div>
+      <div class="ds">옹랑(망고베이) 픽업은 상품마다 추가요금 · <b>종료 장소를 선셋타운/케이블카 쪽으로</b> 내려주는 상품이면 다음 일정이 편하다 · 파도로 취소될 수 있음</div>
     </div></div>
-    <div class="ev"><div class="t">15:30 - 17:00</div><div class="d">
-      <span class="b spa">스파</span><span class="b rsv">예약</span>
-      <div class="ti">💆 앙스파 (Ang Spa, 케이블카 근처)</div>
-      <div class="ds">남부 · 09–22시 · 물놀이 후 샤워하고 마사지</div>
-      <a class="map" href="https://www.google.com/maps/search/?api=1&query=Ang+Spa+Phu+Quoc+An+Thoi" target="_blank">📍 지도</a>
+    <div class="ev"><div class="t">투어 후<br>~ 17:00</div><div class="d">
+      <span class="b spa">스파</span><span class="b rsv">카톡 예약</span>
+      <div class="ti">💆 ANG SPA &amp; NAIL 앙스파 <span class="st">★5.0 (4,447)</span></div>
+      <div class="ds">매일 09–22시 · 라페스타 호텔 앞 · 한국어 되는 사장님 · 리뷰에 픽업 가능 언급 · 키스 오브 더 씨 공연장까지 직선 약 450m</div>
+      <a class="map" href="https://www.google.com/maps/search/?api=1&query=10.0316875,104.0064375" target="_blank">📍 지도</a>
     </div></div>
-    <div class="ev"><div class="t">17:15 - 18:30</div><div class="d">
+    <div class="ev"><div class="t">17:15 - 18:15</div><div class="d">
       <div class="ti">🌇 키스 브릿지 · 선셋타운 일몰 산책</div>
-      <div class="ds">10월 말 일몰 17:30–18:30 사이</div>
     </div></div>
-    <div class="ev"><div class="t">18:30 - 20:30</div><div class="d">
-      <span class="b food">저녁</span><span class="b rsv">쇼와 묶어 예약</span>
-      <div class="ti">🍻 선바바리아 (Sun Bavaria) 디너 콤보</div>
-      <div class="ds">뷔페 + 수제맥주 · 콤보 티켓 뷔페 17:30–21:00 · 공연장 바로 옆</div>
+    <div class="ev"><div class="t">18:15 - 20:15</div><div class="d">
+      <span class="b food">저녁</span>
+      <div class="ti">🍻 Sun Bavaria GastroPub <span class="st">★4.7 (4,662)</span></div>
+      <div class="ds">금 12:00–24:00 · 공연장까지 직선 약 300m · 리뷰: 디너 콤보 구매자 중 "예약했는데 1시간 대기", "구석 자리 배정" 불만이 있음 → 쇼 티켓은 따로 사는 것을 권함</div>
+      <div class="ds">대안: 선셋분식(한식) ★4.8 (1,163) · Octopus Island (선셋타운 야시장) ★4.8 (246)</div>
+      <a class="map" href="https://www.google.com/maps/search/?api=1&query=10.0302868,104.0055156" target="_blank">📍 지도</a>
     </div></div>
     <div class="ev"><div class="t">20:30 입장</div><div class="d">
       <span class="b show">메인 쇼</span><span class="b rsv">예약</span>
-      <div class="ti">🎆 키스 오브 더 씨 (Kiss of the Sea) 21:00 - 21:30</div>
-      <div class="ds">30분 공연 + 21:30 불꽃놀이 약 4분 · 20:30 전 입장해서 자리 잡기</div>
+      <div class="ti">🎆 키스 오브 더 씨 21:00 - 21:30 <span class="st">★4.5 (2,854)</span></div>
+      <div class="ds">+ 불꽃놀이 약 4분 · 좌석 선착순 · 리뷰: "앞자리보다 정면 뒤쪽이 명당", 바람 불면 분수 바닷물이 튄다 → <b>우비</b></div>
+      <a class="map" href="https://www.google.com/maps/search/?api=1&query=10.0276968,104.0060548" target="_blank">📍 지도</a>
     </div></div>
-    <div class="ev"><div class="t">21:40 →</div><div class="d">
-      <div class="ti">🚕 그랩으로 망고베이 복귀</div>
-      <div class="ds">섬 남단 → 북서쪽이라 1시간 가까이 잡을 것 · 쇼 끝나면 차가 몰림</div>
+    <div class="mv">🚕 공연장 → 망고베이 1시간 2분 38.8km (조회 당시 Amalfi 도로 폐쇄 우회 경로)</div>
+    <div class="ev"><div class="t">~ 22:45</div><div class="d">
+      <div class="ti">🏨 망고베이 도착</div>
     </div></div>
   </div>
 </div>
@@ -164,32 +178,39 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
     <div class="ev"><div class="t">09:00 - 11:30</div><div class="d">
       <span class="b act">액티비티</span><span class="b rsv">예약</span>
       <div class="ti">🏎️ ATV 정글 오프로드</div>
-      <div class="ds">클룩·Viator 에서 호텔 픽업 포함 상품 · 업체 미정</div>
+      <div class="ds">업체 미정 · 호텔 픽업 포함 상품으로</div>
     </div></div>
-    <div class="ev"><div class="t">12:30 - 13:30</div><div class="d">
+    <div class="ev"><div class="t">12:00 - 13:00</div><div class="d">
       <span class="b food">점심</span>
-      <div class="ti">🥞 즈엉동 로컬 점심 — 반쎄오 · 쌀국수</div>
-      <div class="ds">즈엉동 시내는 그랩 5–10분 거리끼리 모여 있다</div>
+      <div class="ti">🥞 반쎄오꾸오이3 <span class="st">★4.8 (6,449)</span></div>
+      <div class="ds">매일 10–21시 · 반쎄오 · 볶음면 · 모닝글로리 · 1인 10–30만 동 · 리뷰 쓰면 10% 할인 후기</div>
+      <a class="map" href="https://www.google.com/maps/search/?api=1&query=10.1853857,103.9685768" target="_blank">📍 지도</a>
     </div></div>
-    <div class="ev"><div class="t">14:00 - 16:00</div><div class="d">
-      <span class="b spa">스파</span><span class="b rsv">예약</span>
-      <div class="ti">💆 피오나 스파 (Fiona Spa, 즈엉동)</div>
-      <div class="ds">10–22시 · 해피아워 프로모션 · ATV 먼지 씻고 마사지</div>
-      <a class="map" href="https://www.google.com/maps/search/?api=1&query=Fiona+Spa+Duong+Dong+Phu+Quoc" target="_blank">📍 지도</a>
+    <div class="mv">🚕 반쎄오 → 피오나 9분 3.9km (망고베이에서 반쎄오까지는 28분)</div>
+    <div class="ev"><div class="t">13:15 - 15:15</div><div class="d">
+      <span class="b spa">스파</span><span class="b rsv">카톡 예약</span>
+      <div class="ti">💆 FIONA SPA (즈엉동) <span class="st">★4.8 (3,953)</span></div>
+      <div class="ds">20 Trần Hưng Đạo · 매일 10–22시 · 해피아워 · 질문지로 부위·강도 선택</div>
+      <a class="map" href="https://www.google.com/maps/search/?api=1&query=10.2140018,103.9588717" target="_blank">📍 지도</a>
     </div></div>
-    <div class="ev"><div class="t">16:30 - 18:00</div><div class="d">
-      <div class="ti">🏖️ 망고베이 복귀 · 리조트에서 석양</div>
+    <div class="mv">🚕 피오나 → 망고베이 19분 9.4km</div>
+    <div class="ev"><div class="t">15:30 - 18:00</div><div class="d">
+      <div class="ti">🏖️ 리조트 휴식 · 석양</div>
     </div></div>
+    <div class="mv">🚕 망고베이 → 블루씨푸드 19분 9.1km</div>
     <div class="ev"><div class="t">18:30 - 20:00</div><div class="d">
       <span class="b food">저녁</span>
-      <div class="ti">🦐 소나씨 (야시장 입구 해산물)</div>
-      <div class="ds">한국어 되는 직원 · 시그니처: 마늘버터 새우 · 오징어튀김</div>
+      <div class="ti">🦐 Blue seafood (블루씨푸드) <span class="st">★4.7 (1,187)</span></div>
+      <div class="ds">34 Nguyễn Trãi · 매일 11:30–23:00 · 위생·화장실 깔끔 · 산 크레이피시 무게 재서 보여줌 · 가격은 주변보다 있는 편</div>
+      <div class="ds">대안: Lobster Cave (Động Tôm Hùm) ★4.8 (8,141) · 1 Bạch Đằng · 1인 100만 동 이상</div>
+      <a class="map" href="https://www.google.com/maps/search/?api=1&query=10.2170505,103.9599559" target="_blank">📍 지도</a>
     </div></div>
     <div class="ev"><div class="t">20:00 - 21:30</div><div class="d">
       <span class="b act">야간</span>
-      <div class="ti">🍢 즈엉동 야시장</div>
-      <div class="ds">코코넛 아이스크림 · 간식 구경 → 망고베이 15분</div>
+      <div class="ti">🍢 푸꾸옥 야시장 (Chợ đêm Phú Quốc) <span class="st">★4.0 (6,585)</span></div>
+      <div class="ds">54 Nguyễn Trãi — 블루씨푸드와 같은 길 · 24시까지</div>
     </div></div>
+    <div class="mv">🚕 야시장 → 망고베이 (반대 방향 망고베이 → 블루씨푸드가 19분)</div>
   </div>
 </div>
 
@@ -197,30 +218,45 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 <div class="day">
   <div class="dh"><span>DAY 4 · 10/25 일</span><span class="tag">사오비치 · 출국</span></div>
   <div class="tl">
-    <div class="ev"><div class="t">~ 12:00</div><div class="d">
-      <div class="ti">🌿 리조트 아침 · 해변 · 체크아웃 → 더베이 스파에 짐 맡기기</div>
-      <div class="ds">더베이 스파는 공항 근처라 사오비치 가는 길 · 짐 싣고 섬을 돌지 않는다 (예약할 때 짐보관 같이 요청)</div>
+    <div class="ev"><div class="t">~ 10:45</div><div class="d">
+      <div class="ti">🌿 리조트 아침 · 체크아웃</div>
     </div></div>
-    <div class="ev"><div class="t">13:00 - 16:00</div><div class="d">
+    <div class="mv">🚕 망고베이 → 더베이 스파 42분 20.3km (짐 싣고)</div>
+    <div class="ev"><div class="t">11:30</div><div class="d">
+      <div class="ti">🧳 더베이 스파에 짐 맡기기</div>
+      <div class="ds">저녁 마사지 예약할 때 짐보관 같이 요청</div>
+    </div></div>
+    <div class="ev"><div class="t">11:45 - 12:45</div><div class="d">
+      <span class="b food">점심</span>
+      <div class="ti">🍲 Bếp An Cuisine Sonasea <span class="st">★4.8 (289)</span></div>
+      <div class="ds">더베이 스파에서 직선 약 350m · 매일 07–22시 · 반쎄오 · 모닝글로리 · 해산물 · 1인 10–20만 동</div>
+      <a class="map" href="https://www.google.com/maps/search/?api=1&query=10.1314099,103.9808113" target="_blank">📍 지도</a>
+    </div></div>
+    <div class="mv">🚕 소나시 → 사오비치 25분 13.5km</div>
+    <div class="ev"><div class="t">13:15 - 16:00</div><div class="d">
       <span class="b act">해변</span>
-      <div class="ti">🏖️ 사오비치 (Sao Beach) · 해변 점심</div>
-      <div class="ds">섬 남동쪽 흰 모래 해변 · 해변 식당에서 점심</div>
-      <a class="map" href="https://www.google.com/maps/search/?api=1&query=Sao+Beach+Phu+Quoc" target="_blank">📍 지도</a>
+      <div class="ti">🏖️ 사오비치 (Sao Beach) <span class="st">★3.9 (8,201)</span></div>
+      <div class="ds">리뷰: 입장료 10만 동 받는 입구 있음 · 선베드 10–15만 동 · 샤워장·화장실은 낡음 · 해파리에 쏘였다는 후기 · 제트스키 10분 50만 동</div>
+      <a class="map" href="https://www.google.com/maps/search/?api=1&query=10.056553,104.0375176" target="_blank">📍 지도</a>
     </div></div>
-    <div class="ev"><div class="t">17:00 - 19:00</div><div class="d">
-      <span class="b spa">스파</span><span class="b rsv">예약</span>
-      <div class="ti">💆 더베이 스파 &amp; 네일 (공항 근처)</div>
-      <div class="ds">09–22시 · 방마다 샤워실 · 짐보관 · 무료 픽드랍 · 카톡 'Thebayspa'</div>
+    <div class="mv">🚕 사오비치 → 더베이 스파 (반대 방향 25분)</div>
+    <div class="ev"><div class="t">16:30 - 18:00</div><div class="d">
+      <span class="b spa">스파</span><span class="b rsv">카톡 예약</span>
+      <div class="ti">💆 더베이스파 &amp; 네일 <span class="st">★4.8 (3,033)</span></div>
+      <div class="ds">매일 09–22시 · 방마다 샤워실 · 한국인 사장님 · 픽업·공항 샌딩 · 카톡 'Thebayspa'</div>
+      <a class="map" href="https://www.google.com/maps/search/?api=1&query=10.1309362,103.9839018" target="_blank">📍 지도</a>
     </div></div>
-    <div class="ev"><div class="t">19:15 - 20:45</div><div class="d">
-      <span class="b food">마지막 저녁</span>
-      <div class="ti">🦀 신짜오 씨푸드 (Xin Chào)</div>
-      <div class="ds">즈엉동 해변 오션뷰 · 맛조개 모닝글로리 볶음 · 치즈 랍스터 구이</div>
-      <a class="map" href="https://www.google.com/maps/search/?api=1&query=Xin+Chao+Seafood+Phu+Quoc" target="_blank">📍 지도</a>
+    <div class="mv">🚕 더베이 → 신짜오 24분 11.3km (짐 싣고)</div>
+    <div class="ev"><div class="t">18:30 - 19:40</div><div class="d">
+      <span class="b food">마지막 저녁 · 석양</span><span class="b rsv">예약</span>
+      <div class="ti">🦀 신 짜오 시푸드 <span class="st">★4.2 (4,985)</span></div>
+      <div class="ds">66 Trần Hưng Đạo · 일 21:30 마감 · 석양 오션뷰 · 2층 추천 후기 · 리뷰: <b>계산서의 해산물 무게 확인</b> (500g 먹었는데 1kg 청구 후기)</div>
+      <a class="map" href="https://www.google.com/maps/search/?api=1&query=10.2121952,103.9590413" target="_blank">📍 지도</a>
     </div></div>
-    <div class="ev"><div class="t">21:00 →</div><div class="d">
-      <div class="ti">✈️ 공항 (즈엉동에서 약 15분) → 출국</div>
-      <div class="ds">출발 시각은 항공권으로 확정</div>
+    <div class="mv">🚕 신짜오 → 공항 21분 9.9km</div>
+    <div class="ev"><div class="t">20:05</div><div class="d">
+      <div class="ti">✈️ 공항 도착 → LJ136 22:10 출발</div>
+      <div class="ds">10/26 05:20 인천 T2 도착</div>
     </div></div>
   </div>
 </div>
@@ -228,13 +264,13 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 <div class="box">
   <strong>✅ 떠나기 전</strong>
   <ul>
-    <li>여권 유효기간 입국일 기준 6개월 이상 (한국 여권 무비자 45일)</li>
-    <li>사전 입국신고(PAI): 출발 72시간 전부터 prearrival.immigration.gov.vn — 무료, 1인씩, QR 저장</li>
-    <li>그랩 앱 · eSIM · 여행자보험 · 모기 기피제</li>
+    <li>여권 유효기간: 입국일(10/22) 기준 6개월 이상 → 2027-04-22 이후 만료여야 함</li>
+    <li>사전 입국신고(PAI): 출발 72시간 전(10/19 02:10 이후)부터 prearrival.immigration.gov.vn · 무료 · 1인씩 · QR 저장</li>
+    <li>챙길 것: 우비(쇼) · 모기 기피제 · 그랩 앱 · eSIM · 여행자보험</li>
   </ul>
 </div>
 
-<p class="foot">스파·식당 운영시간은 방문 전 한 번 더 확인</p>
+<p class="foot">구글 지도 2026-09-27 조회 기준 · 영업시간은 방문 전 한 번 더 확인</p>
 </div>
 </body>
 </html>
