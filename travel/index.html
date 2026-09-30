@@ -61,6 +61,15 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .map{display:inline-block;margin-top:6px;padding:4px 10px;background:var(--btn-bg);color:var(--primary);text-decoration:none;font-size:11px;font-weight:700;border-radius:6px;border:1px solid var(--line)}
 .foot{font-size:11px;color:var(--sub);text-align:center;margin:8px 0 24px}
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+#map{height:340px;border-radius:12px;border:1px solid var(--line);margin:8px 0}
+.daybtns{display:flex;gap:6px;flex-wrap:wrap}
+.daybtns button{border:1px solid var(--line);background:var(--btn-bg);color:var(--primary);font-weight:700;font-size:12px;padding:5px 10px;border-radius:8px;cursor:pointer}
+.daybtns button.on{background:var(--primary);color:#fff}
+#stops{font-size:12px;color:var(--sub);padding-left:20px;margin-top:4px}
+.pin{background:var(--primary);color:#fff;border-radius:50%;width:24px;height:24px;line-height:24px;text-align:center;font-weight:800;font-size:12px;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.4)}
+</style>
 </head>
 <body>
 <div class="wrap">
@@ -69,6 +78,15 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
   <h1>🌴 푸꾸옥 3박 5일</h1>
   <p>10/22(목) 07:35 도착 → 10/25(일) 22:10 출국 · 망고베이 2박 + 풀만 1박</p>
 </div>
+<div class="box" id="mapbox">
+  <strong>🗺️ 날짜별 동선</strong>
+  <div class="daybtns" id="daybtns"></div>
+  <div id="map"></div>
+  <a class="map" id="gmap" href="#" target="_blank">🚗 구글 지도에서 이 날 도로 경로 열기</a>
+  <ol id="stops"></ol>
+  <div class="ds" style="margin-top:4px">지도의 선은 방문 순서를 잇는 직선이다. 실제 도로 경로는 위 버튼으로 연다.</div>
+</div>
+
 
 <div class="box">
   <strong>✈️ 항공 (시각은 모두 현지 시각)</strong>
@@ -304,5 +322,58 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 
 <p class="foot">구글 지도 2026-09-27 조회 기준 · 영업시간은 방문 전 한 번 더 확인</p>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+const P={
+ airport:[10.1698,103.9931,"푸꾸옥 공항"],
+ laon:[10.1303393,103.9831369,"라온스파"],
+ bunquay:[10.2188471,103.9585161,"분꿔이 끼엔싸이 본점"],
+ mango:[10.2585496,103.9357132,"망고베이 · On The Rock"],
+ banhxeo:[10.1853857,103.9685768,"반쎄오꾸오이3"],
+ fiona:[10.2140018,103.9588717,"피오나 스파"],
+ blue:[10.2170505,103.9599559,"블루씨푸드"],
+ market:[10.2159752,103.9603565,"푸꾸옥 야시장"],
+ pullman:[10.120146,103.9834602,"풀만"],
+ ang:[10.0316875,104.0064375,"앙스파"],
+ bavaria:[10.0302868,104.0055156,"선바바리아"],
+ kiss:[10.0276968,104.0060548,"키스 오브 더 씨"],
+ bepan:[10.1314099,103.9808113,"Bếp An"],
+ sao:[10.056553,104.0375176,"사오비치"],
+ thebay:[10.1309362,103.9839018,"더베이 스파"],
+ xinchao:[10.2121952,103.9590413,"신짜오 시푸드"]
+};
+const D=[
+ {n:"1일차 10/22",r:["airport","laon","bunquay","mango"]},
+ {n:"2일차 10/23",r:["mango","banhxeo","fiona","mango","blue","market","mango"],note:"ATV 장소 미정이라 빠짐"},
+ {n:"3일차 10/24",r:["mango","pullman","ang","bavaria","kiss","pullman"],note:"호핑투어 경로는 빠짐"},
+ {n:"4일차 10/25",r:["pullman","bepan","sao","thebay","pullman","xinchao","airport"]}
+];
+let map,layer;
+try{
+ map=L.map('map',{scrollWheelZoom:false});
+ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; OpenStreetMap'}).addTo(map);
+ layer=L.layerGroup().addTo(map);
+}catch(e){document.getElementById('map').style.display='none';}
+function show(k){
+ document.querySelectorAll('#daybtns button').forEach((b,j)=>b.classList.toggle('on',j===k));
+ const d=D[k], pts=d.r.map(x=>P[x]);
+ const ol=document.getElementById('stops'); ol.innerHTML='';
+ pts.forEach(p=>{const li=document.createElement('li');li.textContent=p[2];ol.appendChild(li);});
+ if(d.note){const li=document.createElement('div');li.textContent='※ '+d.note;ol.appendChild(li);}
+ const o=pts[0], de=pts[pts.length-1], w=pts.slice(1,-1);
+ document.getElementById('gmap').href='https://www.google.com/maps/dir/?api=1&travelmode=driving&origin='+o[0]+','+o[1]+'&destination='+de[0]+','+de[1]+(w.length?'&waypoints='+w.map(p=>p[0]+','+p[1]).join('|'):'');
+ if(!map) return;
+ layer.clearLayers();
+ const seen={};
+ pts.forEach((p,j)=>{const key=p[0]+','+p[1]; const lab=seen[key]?seen[key]+','+(j+1):String(j+1); seen[key]=lab;});
+ Object.keys(seen).forEach(key=>{const p=pts.find(q=>q[0]+','+q[1]===key);
+  L.marker([p[0],p[1]],{icon:L.divIcon({className:'',html:'<div class="pin">'+(seen[key].length>2?'★':seen[key])+'</div>',iconSize:[24,24],iconAnchor:[12,12]})}).bindPopup(seen[key]+'. '+p[2]).addTo(layer);});
+ L.polyline(pts.map(p=>[p[0],p[1]]),{color:'#0E7C7B',weight:3,opacity:.8,dashArray:'6 6'}).addTo(layer);
+ map.fitBounds(L.latLngBounds(pts.map(p=>[p[0],p[1]])).pad(0.2));
+}
+const bx=document.getElementById('daybtns');
+D.forEach((d,k)=>{const b=document.createElement('button');b.textContent=d.n;b.onclick=()=>show(k);bx.appendChild(b);});
+show(0);
+</script>
 </body>
 </html>
