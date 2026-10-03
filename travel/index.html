@@ -62,6 +62,15 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .cost{font-size:12px;font-weight:700;color:var(--food-fg);margin-top:3px}
 .alt{font-size:12px;color:var(--sub);margin-top:6px;padding:6px 8px;background:var(--btn-bg);border-radius:8px}
 .alt a{color:var(--primary);font-weight:700;text-decoration:none}
+.todo{border:2px solid var(--tag);border-radius:14px;background:var(--card);padding:14px;margin-bottom:14px}
+.todo h2{font-size:17px;color:var(--tag);margin-bottom:8px}
+.todo h3{font-size:14px;margin:10px 0 6px}
+.todo label{display:flex;gap:8px;align-items:flex-start;font-size:13px;padding:6px 0;border-bottom:1px dashed var(--line);cursor:pointer}
+.todo label:last-child{border-bottom:none}
+.todo input{margin-top:3px;width:18px;height:18px;flex-shrink:0;accent-color:var(--tag)}
+.todo input:checked+span{text-decoration:line-through;opacity:.5}
+.todo .cnt{font-size:12px;color:var(--sub);font-weight:700}
+.remind{margin-top:4px;padding:6px 8px;border-radius:8px;background:var(--warn-bg);color:var(--text);font-size:12px;font-weight:700;border-left:3px solid var(--tag)}
 .foot{font-size:11px;color:var(--sub);text-align:center;margin:8px 0 24px}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
@@ -83,22 +92,22 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
   <p>10/22(목) 07:35 도착 → 10/25(일) 22:10 출국 · 망고베이 2박 + 풀만 1박</p>
 </div>
 
-<div class="box warn">
-  <strong>✅ 출발 전에 할 것 (4개 + 서류)</strong>
-  <ul>
-    <li><b>크레이지 파티 호핑</b> 10/25 · <a href="https://www.waug.com/ko/activities/139020" target="_blank">와그</a> · 10/19까지만 환불</li>
-    <li><b>키스 오브 더 씨</b> 10/24 · 클룩·KKday·선월드 (온라인 70만 동 / 현장 100만 동)</li>
-    <li><b>오션스파 카톡 "푸꾸옥사랑"</b> — 10/22 09:00 2인 · VJ979 07:35 공항 픽업 · 끝나고 캐리어째 망고베이 드랍 (도착 당일이라 미리 해야 함)</li>
-    <li><b>풀만 업그레이드 확정 답장</b> (전체 답장)</li>
-    <li>서류 — 여권 만료 2027-04-22 이후인지 · PAI 입국신고 (10/19 04:05 이후) · eSIM·보험·그랩 앱</li>
-  </ul>
-  <strong style="margin-top:8px">🧳 가서 해도 되는 것</strong>
-  <ul>
-    <li>망고베이 체크인 데스크 — 도착 때 짐 보관 · 조식 시간</li>
-    <li>풀만 10/24 오전 짐 맡길 때 프런트에 — 밤 22:15 체크인 · 10/25 체크아웃 후 캐리어 보관 · 투어 후 샤워 · <b>19:40 공항 셔틀</b> (24시간 전 예약이라 10/24 오전에 꼭)</li>
-    <li>문스파·앙스파 — 전날 카톡으로</li>
-    <li>Mai Hương — 당일 전화하거나 그냥 가기 (+84 907 677 888)</li>
-  </ul>
+<div class="todo" id="todo">
+  <h2>📌 잊지 말 것 <span class="cnt" id="todocnt"></span></h2>
+  <h3>✈️ 출발 전에 꼭</h3>
+  <label><input type="checkbox" data-k="hop"><span><b>크레이지 파티 호핑 예약</b> 10/25 · <a href="https://www.waug.com/ko/activities/139020" target="_blank">와그</a> · <b>10/19까지만 환불</b></span></label>
+  <label><input type="checkbox" data-k="kiss"><span><b>키스 오브 더 씨 예매</b> 10/24 · 클룩·KKday·선월드 (온라인 70만 동 / 현장 100만 동)</span></label>
+  <label><input type="checkbox" data-k="ocean"><span><b>오션스파 카톡 "푸꾸옥사랑"</b> 10/22 09:00 2인 · VJ979 07:35 공항 픽업 · 끝나고 캐리어째 망고베이 드랍</span></label>
+  <label><input type="checkbox" data-k="pull"><span><b>풀만 업그레이드 확정 답장</b> (전체 답장으로)</span></label>
+  <label><input type="checkbox" data-k="pass"><span>여권 만료일 2027-04-22 이후인지</span></label>
+  <label><input type="checkbox" data-k="pai"><span>PAI 입국신고 — 10/19 04:05 이후 prearrival.immigration.gov.vn, 1인씩</span></label>
+  <label><input type="checkbox" data-k="esim"><span>eSIM · 여행자보험 · 그랩 앱 · 우비 · 수건 (호핑) · 현금</span></label>
+  <h3>🧳 가서 할 것 (그날 일정 칸에도 📢로 표시)</h3>
+  <label><input type="checkbox" data-k="d1"><span>10/22 망고베이 도착 — 프런트에 짐 보관 · 조식 시간</span></label>
+  <label><input type="checkbox" data-k="d1b"><span>10/22 밤 — 문스파 카톡 (다음 날 13:30) · Mai Hương은 당일 전화</span></label>
+  <label><input type="checkbox" data-k="d2"><span>10/23 밤 — 앙스파 카톡 (다음 날 16:00)</span></label>
+  <label><input type="checkbox" data-k="d3"><span>10/24 풀만에 짐 맡길 때 — 22:15 늦은 체크인 · 다음 날 캐리어 보관 · 투어 후 샤워 · <b>19:40 공항 셔틀 (24시간 전 예약)</b></span></label>
+  <div class="ds" style="margin-top:6px">체크 표시는 이 기기 브라우저에만 저장된다</div>
 </div>
 
 <div class="box" id="mapbox">
@@ -167,6 +176,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
     <div class="mv">🚕 오션스파 → 망고베이 약 26분</div>
     <div class="ev"><div class="t">11:15</div><div class="d">
       <div class="ti">🏨 망고베이 도착 · 짐 맡기기</div>
+      <div class="remind">📢 프런트에: 짐 보관 · 조식 시간 묻기</div>
     </div></div>
     <div class="ev"><div class="t">11:30 - 13:00</div><div class="d">
       <span class="b food">점심</span>
@@ -190,6 +200,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
     <div class="ev"><div class="t">17:30 - 19:30</div><div class="d">
       <span class="b food">저녁 · 석양</span><span class="b rsv">예약 필요</span>
       <div class="ti">🦐 Mai Hương Beachfront (그랜드월드 해변) <span class="st">★4.9 (3,185)</span></div>
+      <div class="remind">📢 해변석 원하면 낮에 전화 +84 907 677 888</div>
       <div class="ds">매일 11:00–23:30 · 일몰 17:44 · 야외 해변석 · 리뷰: 굴·가리비 치즈구이, 부채새우, 페퍼 스테이크 · "가격대는 있다" · +84 907 677 888</div>
       <div class="cost">💰 가격 미확인 (구글에 가격대 없음)</div>
       <a class="map" href="https://www.google.com/maps/search/?api=1&query=10.3229677,103.8531771" target="_blank">📍 지도</a>
@@ -199,6 +210,9 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
       <div class="ti">🌃 그랜드월드 야경 산책</div>
     </div></div>
     <div class="mv">🚕 그랜드월드 → 망고베이 19–22분</div>
+    <div class="ev"><div class="t">자기 전</div><div class="d">
+      <div class="remind">📢 문스파 카톡 Moonspapq — 내일 13:30 2인 90분</div>
+    </div></div>
   </div>
 </div>
 
@@ -246,6 +260,9 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
           <div class="alt"><b>근처 후보</b> (구글 지도 10/2 확인)<br>· <a href="https://www.google.com/maps/search/?api=1&query=Blue+seafood+restaurant+Phu+Quoc&query_place_id=ChIJbd7_NgGNpzERqXUHaQ6Y6K4" target="_blank">Blue seafood restaurant Phu Quoc</a> ★4.7 (1,187) · 매일 11:30–23:00 · 약 130m · 리뷰: 위생·화장실 깔끔, 크레이피시 무게 재서 보여줌, 가격은 있는 편<br>· <a href="https://www.google.com/maps/search/?api=1&query=NINH+KITCHEN+Vietnamese+Cuisine&query_place_id=ChIJM7ZmjUmNpzERLAWS1d-uWFA" target="_blank">NINH KITCHEN Vietnamese Cuisine</a> ★4.9 (345) · 매일 10:30–22:00 · 1인 10–20만 동 · 약 300m · 분짜·스프링롤·반쎄오 (리뷰 키워드) · 리뷰 본문은 못 불러옴<br>· <a href="https://www.google.com/maps/search/?api=1&query=Lobster+Cave+seafood+Phu+Quoc&query_place_id=ChIJh_DUIYeNpzERDqbaRMxPgTY" target="_blank">Lobster Cave seafood Phu Quoc</a> ★4.8 (8,141) · 금요일 22:30까지 (구글, 요일별 표는 못 불러옴) · 1인 100만 동 · 약 390m · 리뷰: 새우 까줌, 예약하면 바닷가 자리</div>
     </div></div>
     <div class="mv">🚕 야시장 → 망고베이 17분 9.2km</div>
+    <div class="ev"><div class="t">자기 전</div><div class="d">
+      <div class="remind">📢 앙스파 카톡 Angspa — 내일 16:00 2인</div>
+    </div></div>
   </div>
 </div>
 
@@ -259,6 +276,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
     <div class="mv">🚕 망고베이 → 풀만 38–46분 21–26km</div>
     <div class="ev"><div class="t">11:45</div><div class="d">
       <div class="ti">🧳 풀만에 짐 맡기기 (체크인 15:00)</div>
+      <div class="remind">📢 프런트에 한 번에: 22:15 늦은 체크인 · 내일 체크아웃 후 캐리어 보관 · 투어 후 샤워 · 내일 19:40 공항 셔틀 (24시간 전 예약이라 지금)</div>
     </div></div>
     <div class="ev"><div class="t">12:00 - 13:00</div><div class="d">
       <span class="b food">점심</span>
@@ -416,6 +434,19 @@ function show(k){
 const bx=document.getElementById('daybtns');
 D.forEach((d,k)=>{const b=document.createElement('button');b.textContent=d.n;b.onclick=()=>show(k);bx.appendChild(b);});
 show(0);
+</script>
+<script>
+(function(){
+  var KEY='pq-todo-v1', st={};
+  try{ st=JSON.parse(localStorage.getItem(KEY)||'{}'); }catch(e){ st={}; }
+  var boxes=document.querySelectorAll('#todo input[type=checkbox]');
+  function cnt(){ var d=0; boxes.forEach(function(b){ if(b.checked) d++; }); var c=document.getElementById('todocnt'); if(c) c.textContent=d+' / '+boxes.length+' 완료'; }
+  boxes.forEach(function(b){
+    b.checked=!!st[b.dataset.k];
+    b.addEventListener('change',function(){ st[b.dataset.k]=b.checked; try{ localStorage.setItem(KEY,JSON.stringify(st)); }catch(e){} cnt(); });
+  });
+  cnt();
+})();
 </script>
 </body>
 </html>
