@@ -45,6 +45,7 @@
 .concl p{margin:0}
 .mebtn,.mrow button{padding:9px 16px;border:0;border-radius:10px;background:var(--good);color:#fff;font:inherit;cursor:pointer}.mebtn{margin:12px 0 4px}.mrow .ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
 .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:50;align-items:center;justify-content:center;padding:16px}.modal.on{display:flex}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 2px}.chip{padding:6px 12px;border:1px solid var(--line);border-radius:999px;color:var(--ink);text-decoration:none;font-size:14px}.chip:hover{border-color:var(--good);color:var(--good)}
 .mbox{width:100%;max-width:380px;background:var(--surface);border-radius:14px;padding:18px;box-shadow:0 10px 40px rgba(0,0,0,.25)}.mtitle{font-weight:700;margin:0 0 10px}
 .mbox input{width:100%;box-sizing:border-box;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font:inherit}.mrow{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
 .pdoc{margin:8px 0 18px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
@@ -119,7 +120,8 @@ td.dim{color:var(--ink2)}
   <div class="modal" id="meModal"><div class="mbox">
     <p class="mtitle">개인 진단 — 닉네임 입력</p>
     <input id="meName" placeholder="닉네임" autocomplete="off">
-    <p class="meta">진단 있는 사람: Chillage</p>
+    <p class="meta">이번 주 진단 — 눌러서 이동</p>
+    <div class="chips"><a class="chip" href="me/?n=Chillage">Chillage</a></div>
     <div class="mrow"><button id="meCancel" class="ghost">닫기</button><button id="meGo">이동</button></div>
   </div></div>
   <div class="weeks"><button class="wb on" data-w="2026-10-13">10/13</button><button class="wb" data-w="2026-10-12">10/12</button><button class="wb" data-w="2026-10-06">10/6</button><button class="wb" data-w="2026-10-05">10/5</button><button class="wb" data-w="2026-09-29">9/29</button><button class="wb" data-w="2026-09-28">9/28</button></div>
